@@ -1,0 +1,49 @@
+
+<html>
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript">
+	   window.onload = function() {
+	   	   if (navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(locationSuccess, locationError,{
+        		// 指示浏览器获取高精度的位置，默认为false
+        		enableHighAccuracy: true,
+        		// 指定获取地理位置的超时时间，默认不限时，单位为毫秒
+        		timeout: 5000,
+        		// 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。
+        		maximumAge: 3000
+    			});
+			}else{
+    			alert("Your browser does not support Geolocation!");
+			}
+	   	}
+
+	   locationError = function(error){
+    		switch(error.code) {
+        		case error.TIMEOUT:
+            	alert("连接超时，请重试!");
+            	break;
+        		case error.POSITION_UNAVAILABLE:
+            	alert('抱歉，我们暂时无法获取您的位置信息!');
+            	break;
+        		case error.PERMISSION_DENIED:
+            	alert('请设置允许网站获取您的位置信息');
+            	break;
+        		case error.UNKNOWN_ERROR:
+            	alert('发生未知错误!');
+            	break;
+    		}
+       }
+
+       locationSuccess = function(position){
+            var coords = position.coords;
+            var lat = coords.latitude;
+            var lng = coords.longitude;
+            alert(lat+" "+lng);
+       }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
